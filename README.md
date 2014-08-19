@@ -1,4 +1,4 @@
 heroku-buildpack-cmake
-============================
+======================
 
-http://blog.clearideas.ca/2013/04/26/Adding-Custom-Binaries-to-Heroku/
+A Heroku buildpack that installs the barebones CMake tools (sans modules and templates).

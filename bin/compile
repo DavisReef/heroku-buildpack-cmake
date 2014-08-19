@@ -7,16 +7,15 @@ echo "-----> Installing cmake"
 cd $1
 
 # download
-curl https://s3.amazonaws.com/mergeguard/cmake.tar.gz -s -O
+curl https://s3.amazonaws.com/indianwells/cmake.tar.gz -s -O
 
 # make dir
 mkdir -p /tmp/codon/vendor
 
 # untar the binary to the directory we want
-tar -C /tmp/codon/vendor -xvf cmake.tar.gz
+tar -C /tmp/codon/vendor -xzf cmake.tar.gz
 
 debug=`ls /tmp/codon/vendor/bin`
 echo $debug
 
 echo $PATH
-
