@@ -3,17 +3,16 @@
 
 echo "-----> Installing cmake"
 
-# change to the the BUILD_DIR ($1)
-cd $1
+# change to BUILD_DIR
+cd "$1"
 
 # download
 curl https://s3.amazonaws.com/indianwells/cmake.tar.gz -s -O
 
-# make dir
+# unpack binaries
 mkdir -p /tmp/codon/vendor
-
-# untar the binary to the directory we want
 tar -C /tmp/codon/vendor -xzf cmake.tar.gz
+rm -rf cmake.tar.gz
 
 cd /tmp/codon/vendor/bin
 echo '       Installed: '`ls c*`
