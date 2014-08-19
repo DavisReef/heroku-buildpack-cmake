@@ -15,6 +15,7 @@ mkdir -p /tmp/codon/vendor
 # untar the binary to the directory we want
 tar -C /tmp/codon/vendor -xzf cmake.tar.gz
 
-files=`ls /tmp/codon/vendor/bin/c*`
+files=`cd /tmp/codon/vendor/bin; ls c*`
 echo '       Installed: '"$files"
 echo '       PATH: '"$PATH"
+echo
