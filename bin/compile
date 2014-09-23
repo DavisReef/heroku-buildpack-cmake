@@ -7,7 +7,7 @@ echo "-----> Installing cmake"
 cd "$1"
 
 # download
-curl https://s3.amazonaws.com/indianwells/cmake.tar.gz -s -O
+curl https://s3.amazonaws.com/crystalvista/devtools/cmake.tar.gz -s -O
 
 # unpack binaries
 mkdir -p /tmp/codon/vendor
