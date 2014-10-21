@@ -3,18 +3,15 @@
 
 echo "-----> Installing cmake"
 
-# change to BUILD_DIR
-cd "$1"
+TARBALL_URL="https://s3.amazonaws.com/crystalvista/devtools/cmake.tar.gz"
+TARGET_DIR="/tmp/codon/vendor"
 
-# download
-curl https://s3.amazonaws.com/crystalvista/devtools/cmake.tar.gz -s -O
+# download and unpack
+mkdir -p "$TARGET_DIR"
+cd       "$TARGET_DIR"
+curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 "$TARBALL_URL" -s -o - | tar zxf -
 
-# unpack binaries
-mkdir -p /tmp/codon/vendor
-tar -C /tmp/codon/vendor -xzf cmake.tar.gz
-rm -rf cmake.tar.gz
-
-cd /tmp/codon/vendor/bin
+cd ./bin
 echo '       Installed: '`ls c*`
 echo '       PATH: '"$PATH"
 echo
