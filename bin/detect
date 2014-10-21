@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # bin/detect <build-dir>
 
+# If the buildpack is here then assume it's meant to be run
 echo "cmake"
 exit 0
