@@ -1,17 +1,32 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-echo "-----> Installing cmake"
+arrow() {
+  sed -u 's/^/-----> /'
+}
 
-TARBALL_URL="https://s3.amazonaws.com/crystalvista/devtools/cmake.tar.gz"
-TARGET_DIR="/tmp/codon/vendor"
+indent() {
+  sed -u 's/^/       /'
+}
+
+S3_BASE_URL="http://s3.amazonaws.com/crystalvista/devtools"
+TARGET_PATH="/tmp/codon/vendor"
+
+function install()
+{
+  local tarball destdir
+  tarball="$1"
+  destdir="$2"
+
+  mkdir -p "$TARGET_PATH/$destdir"
+  curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 "$S3_BASE_URL/$tarball" -s -o - | tar zxf - -C "$TARGET_PATH/$destdir"
+}
+
+echo "Installing cmake" | arrow
 
 # download and unpack
-mkdir -p "$TARGET_DIR"
-cd       "$TARGET_DIR"
-curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 "$TARBALL_URL" -s -o - | tar zxf -
+install "cmake.tar.gz"
 
-cd ./bin
-echo '       Installed: '`ls c*`
-echo '       PATH: '"$PATH"
+cd "$TARGET_PATH/bin"
+echo "Installed: "`ls c*` | indent
 echo
