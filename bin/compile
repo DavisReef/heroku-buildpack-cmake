@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# bin/compile <build-dir> <cache-dir>
+# bin/compile BUILD_DIR CACHE_DIR ENV_DIR
 
 arrow() {
   sed -u 's/^/-----> /'
@@ -8,6 +8,10 @@ arrow() {
 indent() {
   sed -u 's/^/       /'
 }
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+BUILDPACK_DIR=`cd $(dirname $0)/..; pwd`
 
 S3_BASE_URL="https://s3.amazonaws.com/crystalvista/devtools"
 TARGET_PATH="/tmp/codon/vendor"
