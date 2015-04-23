@@ -12,18 +12,18 @@ indent() {
     CACHE_DIR=$2
 BUILDPACK_DIR=`cd $(dirname $0)/..; pwd`
 
-S3_BASE_URL="https://s3.amazonaws.com/crystalvista/devtools"
+S3_BASE_URL="http://s3.amazonaws.com/crystalvista/devtools"
 TARGET_PATH="/tmp/codon/vendor"
 
 function install()
 {
   local tarball destdir
-  tarball="$1"
-  destdir="$2"
+  tarball=$1
+  destdir=$2
 
   mkdir -p "$TARGET_PATH/$destdir"
   echo "Fetching   $S3_BASE_URL/$tarball" | indent
-  curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 "$S3_BASE_URL/$tarball" -s -o - | tar zxf - -C "$TARGET_PATH/$destdir"
+  curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 "$S3_BASE_URL/$tarball" -s -o - | tar xzf - -C "$TARGET_PATH/$destdir"
 }
 
 echo "Installing cmake" | arrow
