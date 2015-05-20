@@ -13,23 +13,15 @@ indent() {
 BUILDPACK_DIR=`cd $(dirname $0)/..; pwd`
 
 S3_BASE_URL="http://s3.amazonaws.com/crystalvista/devtools"
+TARBALL_URL="$S3_BASE_URL/cmake.tar.gz"
 TARGET_PATH="/tmp/codon/vendor"
 
-function install()
-{
-  local tarball destdir
-  tarball=$1
-  destdir=$2
-
-  mkdir -p "$TARGET_PATH/$destdir"
-  echo "Fetching   $S3_BASE_URL/$tarball" | indent
-  curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 "$S3_BASE_URL/$tarball" -s -o - | tar xzf - -C "$TARGET_PATH/$destdir"
-}
-
-echo "Installing cmake" | arrow
+echo "Installing CMake" | arrow
+mkdir -p "$TARGET_PATH"
 
 # download and unpack
-install "cmake.tar.gz"
+echo "Fetching   $TARBALL_URL" | indent
+curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 "$TARBALL_URL" -s -o - | tar xzf - -C "$TARGET_PATH"
 
 cd "$TARGET_PATH/bin"
 echo "Installed: "`ls c*` | indent
